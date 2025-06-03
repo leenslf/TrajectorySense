@@ -1,6 +1,6 @@
 # Gravel Simulation for TrajectorySense
 
-This project simulates a robot navigating a gravel road in Gazebo, enabling collection and analysis of IMU (Inertial Measurement Unit) sensor data. The goal is to evaluate the effects of rough terrain on the robot's trajectory using ROS 2 and Gazebo.
+This project simulates a robot navigating a gravel road in Gazebo, enabling collection and analysis of IMU (Inertial Measurement Unit) sensor data. The goal is to evaluate the effects of rough terrain on the robot's trajectory using ROS 2 Humble and Gazebo.
 
 ## Features
 
