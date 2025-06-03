@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+  <gazebo>
+    <plugin name="moborobo_controller" filename="libgazebo_ros_diff_drive.so">
+        <left_joint>left_wheel_joint</left_joint>
+        <right_joint>right_wheel_joint</right_joint>
+        <legacy_mode>false</legacy_mode>
+        <robot_base_frame>base_link</robot_base_frame>
+        <wheel_separation>0.380</wheel_separation>
+        <wheel_diameter>0.2</wheel_diameter>
+        <publish_wheel_joint_state>true</publish_wheel_joint_state>
+    </plugin>
+  </gazebo>
+
+</robot>

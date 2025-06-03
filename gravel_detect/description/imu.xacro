@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="imu_link">
+	  <visual>
+		<geometry>
+		  <box size="0.01 0.01 0.005"/>
+		</geometry>
+	  </visual>
+
+	  <collision>
+		<geometry>
+		  <box size="0.01 0.01 0.005"/>
+		</geometry>
+	  </collision>
+
+	  <!--<xacro:box_inertia m="0.1" w="0.1" d="0.1" h="0.1"/>-->
+	</link>
+
+	<joint name="imu_joint" type="fixed">
+	  <parent link="front_right_caster"/>
+	  <child link="imu_link"/>
+	  <origin xyz="0 -0.03 -0.01"/>
+	</joint>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="moborobo_imu" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+        <plugin name="moborobo_imu" filename="libgazebo_ros_imu_sensor.so">
+            <ros>
+                <namespace>imu</namespace>
+                <remapping>~/out:=data</remapping>
+            </ros>
+            <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        </plugin>
+    </sensor>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>
