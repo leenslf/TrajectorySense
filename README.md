@@ -12,14 +12,9 @@ This project simulates a robot navigating a gravel road in Gazebo, enabling coll
 ## Demo
 
 [![Watch the video](https://img.youtube.com/vi/XXs3yhgwSZE/0.jpg)](https://www.youtube.com/watch?v=XXs3yhgwSZE)
-
 ## Installation
-
 ```bash
 git clone https://github.com/MAli7319/TrajectorySense.git
-cd TrajectorySense
-colcon build --symlink-install
-source install/setup.bash
 ```
 
 ## Docker
@@ -38,6 +33,14 @@ cd util
 Excute container:
 ```bash
 docker exec -it trajectorysense-container bash
+```
+
+## Build ROS2 Workspace
+
+```bash
+cd TrajectorySense
+colcon build --symlink-install
+source install/setup.bash
 ```
 
 ## Running the Simulation
