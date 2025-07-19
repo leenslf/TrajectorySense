@@ -16,14 +16,28 @@ This project simulates a robot navigating a gravel road in Gazebo, enabling coll
 ## Installation
 
 ```bash
-conda deactivate  # Ensure conda doesn't interfere with ROS 2 environment
 git clone https://github.com/MAli7319/TrajectorySense.git
 cd TrajectorySense
-mkdir src
-mv gravel_detect /src
-rm -r TrajectorySense
 colcon build --symlink-install
 source install/setup.bash
+```
+
+## Docker
+Build Docker image:
+```bash
+chmod +x *.sh
+cd util
+./build_docker.sh
+```
+
+Run container:
+```bash
+cd util
+./run_docker.sh
+```
+Excute container:
+```bash
+docker exec -it trajectorysense-container bash
 ```
 
 ## Running the Simulation
