@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 IMAGE_NAME="trajectorysense-ros2"
 IMAGE_TAG="humble"
 CONTAINER_NAME="trajectorysense-container"
-WORKSPACE_PATH="$(dirname "$(pwd)")"  # Parent directory (repository root)
+WORKSPACE_PATH="$(cd .. && pwd)" 
 
 echo -e "${BLUE}=== TrajectorySense Docker Run Script ===${NC}"
 
