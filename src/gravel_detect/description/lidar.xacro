@@ -22,36 +22,47 @@
         </inertial>
     </link>
 
-    <!-- LiDAR Joint - mounted on top of the robot -->
+    <!-- LiDAR Joint -->
     <joint name="lidar_joint" type="fixed">
         <parent link="base_link"/>
         <child link="lidar_link"/>
         <origin xyz="0.0 0.0 0.35" rpy="0 0 0"/>
     </joint>
 
-    <!-- Gazebo LiDAR Sensor Plugin -->
+    <!-- 3D LiDAR Sensor  -->
     <gazebo reference="lidar_link">
         <material>Gazebo/Black</material>
         
-        <sensor name="lidar" type="ray">
+        <sensor name="lidar_3d" type="ray">
             <pose>0 0 0 0 0 0</pose>
             <visualize>true</visualize>
             <update_rate>10</update_rate>
             
             <ray>
                 <scan>
+                    <!-- Horizontal scan (360 degrees around) -->
                     <horizontal>
-                        <samples>360</samples>
+                        <samples>360</samples>           <!-- 360 beams around -->
                         <resolution>1</resolution>
-                        <min_angle>-3.14159</min_angle>
-                        <max_angle>3.14159</max_angle>
+                        <min_angle>-3.14159</min_angle>  <!-- -180° -->
+                        <max_angle>3.14159</max_angle>   <!-- +180° -->
                     </horizontal>
+                    
+                    <!-- Vertical scan (multiple layers) -->
+                    <vertical>
+                        <samples>16</samples>            <!-- 16 vertical layers -->
+                        <resolution>1</resolution>
+                        <min_angle>-0.2617</min_angle>   <!-- -15° (down) -->
+                        <max_angle>0.2617</max_angle>    <!-- +15° (up) -->
+                    </vertical>
                 </scan>
+                
                 <range>
                     <min>0.1</min>
-                    <max>30.0</max>
+                    <max>30.0</max>                      <!-- Good for indoor/outdoor -->
                     <resolution>0.01</resolution>
                 </range>
+                
                 <noise>
                     <type>gaussian</type>
                     <mean>0.0</mean>
@@ -59,11 +70,12 @@
                 </noise>
             </ray>
             
-            <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+            <!-- 3D Point Cloud Plugin -->
+            <plugin name="lidar_3d_controller" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
-                    <remapping>~/out:=scan</remapping>
+                    <remapping>~/out:=velodyne_points</remapping>  <!-- 3D topic name -->
                 </ros>
-                <output_type>sensor_msgs/LaserScan</output_type>
+                <output_type>sensor_msgs/PointCloud2</output_type>  <!-- 3D format -->
                 <frame_name>lidar_link</frame_name>
             </plugin>
         </sensor>

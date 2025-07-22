@@ -14,7 +14,7 @@ This project simulates a robot navigating a gravel road in Gazebo, enabling coll
 [![Watch the video](https://img.youtube.com/vi/XXs3yhgwSZE/0.jpg)](https://www.youtube.com/watch?v=XXs3yhgwSZE)
 ## Installation
 ```bash
-git clone https://github.com/MAli7319/TrajectorySense.git
+git clone https://github.com/leenslf/TrajectorySense.git
 ```
 
 ## Docker
@@ -45,34 +45,8 @@ source install/setup.bash
 
 ## Running the Simulation
 
-Replace `{your_username}` and `{your_workspace}` with your actual user name and workspace folder.
-
-### 1. Launch Gazebo with the Gravel World
-
-**First terminal:**
-
 ```bash
-ros2 launch gazebo_ros gazebo.launch.py world:=/home/{your_username}/{your_workspace}/src/gravel_detect/world/gravel.world
-```
-
-### 2. Start the Robot State Publisher
-
-**Second terminal:**
-
-```bash
-ros2 run robot_state_publisher robot_state_publisher \
-  --ros-args -p robot_description:="$(xacro ~/{your_workspace}/src/gravel_detect/description/robot.urdf.xacro)"
-```
-
-### 3. Spawn the Robot into the World
-
-**Third terminal:**
-
-```bash
-ros2 run gazebo_ros spawn_entity.py \
-  -topic /robot_description \
-  -entity gravel_detect \
-  -x 0.5 -y 1 -z 0.2
+  ros2 launch gravel_detect minimal_gazebo.launch.py
 ```
 
 ## IMU Data Collection & Analysis

@@ -1,0 +1,30 @@
+# LiDAR and IMU topics 
+lidar_topic: "/velodyne_points"
+imu_topic: "/imu/data"
+
+lidar_type: "Velodyne"
+
+# Range filtering
+min_radius: 0.3
+max_radius: 25.0
+
+# IMU settings
+enable_ahrs_initalization: true
+enable_acc_correct: false 
+
+# Gravity (standard Earth gravity)
+gravity: 9.81
+
+# Extrinsic calibration: LiDAR to IMU transform
+t_imu_lidar: [-0.32, 0.18, 0.49]
+R_imu_lidar: [1.0, 0.0, 0.0,
+              0.0, 1.0, 0.0, 
+              0.0, 0.0, 1.0]
+
+# Processing parameters
+voxel_size: 0.5
+max_iterations: 3
+convergence_threshold: 0.01
+
+# Map parameters
+map_size: 1000
