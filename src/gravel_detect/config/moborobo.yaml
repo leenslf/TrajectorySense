@@ -1,8 +1,7 @@
 # LiDAR and IMU topics 
-lidar_topic: "/velodyne_points"
-imu_topic: "/imu/data"
-
-lidar_type: "Velodyne"
+odom/lidar_topic: /velodyne_points  # Changed from /points_raw
+odom/imu_topic: /imu/data
+odom/lidar_type: velodyne
 
 # Range filtering
 min_radius: 0.3
