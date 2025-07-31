@@ -30,6 +30,7 @@ RUN apt-get update -y && \
         ros-humble-cartographer-ros \
         ros-humble-navigation2 \
         ros-humble-nav2-bringup && \
+        ros-humble-velodyne-gazebo-plugins && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
