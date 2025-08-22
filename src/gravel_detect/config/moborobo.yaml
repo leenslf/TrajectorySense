@@ -1,5 +1,5 @@
 # LiDAR and IMU topics 
-odom/lidar_topic: /velodyne_points  # Changed from /points_raw
+odom/lidar_topic: /points_raw    
 odom/imu_topic: /imu/data
 odom/lidar_type: velodyne
 
@@ -15,7 +15,7 @@ enable_acc_correct: false
 gravity: 9.81
 
 # Extrinsic calibration: LiDAR to IMU transform
-t_imu_lidar: [-0.32, 0.18, 0.49]
+t_imu_lidar: [0.2, 0.0, 0.5]      # FIX: Correct transform
 R_imu_lidar: [1.0, 0.0, 0.0,
               0.0, 1.0, 0.0, 
               0.0, 0.0, 1.0]

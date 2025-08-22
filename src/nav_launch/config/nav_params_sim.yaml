@@ -1,0 +1,376 @@
+#Adopted from https://github.com/ros-navigation/navigation2/blob/ebe60dcab83d4f736629287d7530fea86806a384/nav2_bringup/params/nav2_params.yaml
+
+bt_navigator:
+  ros__parameters:
+    bt_loop_duration: 20 #ms
+    default_server_timeout: 20 # ms
+    wait_for_service_timeout: 1000 # ms
+    action_server_result_timeout: 300 # s
+    transform_tolerance: 0.2 # s
+    global_frame: map
+    robot_base_frame: base_link
+    odom_topic: /odom
+    use_sim_time: True
+    bond_heartbeat_period: 0.2
+    # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
+    # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
+    # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
+    # They can be set here or via a RewrittenYaml remap from a parent launch file to Nav2.
+    plugin_lib_names:
+      - nav2_compute_path_to_pose_action_bt_node
+      - nav2_compute_path_through_poses_action_bt_node
+      - nav2_smooth_path_action_bt_node
+      - nav2_follow_path_action_bt_node
+      - nav2_spin_action_bt_node
+      - nav2_wait_action_bt_node
+      - nav2_assisted_teleop_action_bt_node
+      - nav2_back_up_action_bt_node
+      - nav2_drive_on_heading_bt_node
+      - nav2_clear_costmap_service_bt_node
+      - nav2_is_stuck_condition_bt_node
+      - nav2_goal_reached_condition_bt_node
+      - nav2_goal_updated_condition_bt_node
+      - nav2_globally_updated_goal_condition_bt_node
+      - nav2_is_path_valid_condition_bt_node
+      - nav2_initial_pose_received_condition_bt_node
+      - nav2_reinitialize_global_localization_service_bt_node
+      - nav2_rate_controller_bt_node
+      - nav2_distance_controller_bt_node
+      - nav2_speed_controller_bt_node
+      - nav2_truncate_path_action_bt_node
+      - nav2_truncate_path_local_action_bt_node
+      - nav2_goal_updater_node_bt_node
+      - nav2_recovery_node_bt_node
+      - nav2_pipeline_sequence_bt_node
+      - nav2_round_robin_node_bt_node
+      - nav2_transform_available_condition_bt_node
+      - nav2_time_expired_condition_bt_node
+      - nav2_path_expiring_timer_condition
+      - nav2_distance_traveled_condition_bt_node
+      - nav2_single_trigger_bt_node
+      - nav2_goal_updated_controller_bt_node
+      - nav2_is_battery_low_condition_bt_node
+      - nav2_navigate_through_poses_action_bt_node
+      - nav2_navigate_to_pose_action_bt_node
+      - nav2_remove_passed_goals_action_bt_node
+      - nav2_planner_selector_bt_node
+      - nav2_controller_selector_bt_node
+      - nav2_goal_checker_selector_bt_node
+      - nav2_controller_cancel_bt_node
+      - nav2_path_longer_on_approach_bt_node
+      - nav2_wait_cancel_bt_node
+      - nav2_spin_cancel_bt_node
+      - nav2_back_up_cancel_bt_node
+      - nav2_assisted_teleop_cancel_bt_node
+      - nav2_drive_on_heading_cancel_bt_node
+      - nav2_is_battery_charging_condition_bt_node
+
+bt_navigator_navigate_through_poses_rclcpp_node:
+  ros__parameters:
+    use_sim_time: True
+
+bt_navigator_navigate_to_pose_rclcpp_node:
+  ros__parameters:
+    use_sim_time: True
+
+# Local Costmap
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      always_send_full_costmap: False
+      footprint_padding: 0.05 # cm
+      global_frame: map
+      robot_base_frame: base_link
+      footprint: "[
+        [0.326, 0.971],   
+        [0.326, -0.971],  
+        [-0.326, -0.971], 
+        [-0.326, 0.971]  
+      ]"
+      height: 4 # m
+      width: 4 # m
+      origin_x: 0.0 # m
+      origin_y: 0.0 # m
+      resolution: 0.1 # m
+
+      robot_radius: 0.3
+      rolling_window: True
+      lethal_cost_threshold: 200
+      track_unknown_space: False # false: unknown space = free space, else unknown space
+      unknown_cost_value: 70 # only valid if tracking
+      trinary_costmap: False
+
+      publish_frequency: 5.0
+      update_frequency: 5.0
+      transform_tolerance: 0.3
+      initial_transform_timeout: 60.0
+      use_maximum: False # use max. cost from all costmaps or override
+      use_sim_time: True
+
+      plugins: ["obstacle_layer", "denoise_layer", "inflation_layer"]
+
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        footprint_clearing_enabled: true
+        max_obstacle_height: 5.0
+        combination_method: 1
+        observation_sources: scan
+        scan:
+          topic: /scan
+          data_type: "LaserScan"
+          min_obstacle_height: -5.0
+          max_obstacle_height: 5.0
+          inf_is_valid: True
+          clearing: True
+          marking: True
+          obstacle_max_range: 4.0
+          obstacle_min_range: 0.1
+          raytrace_max_range: 4.0
+          raytrace_min_range: 0.5
+
+      denoise_layer:
+        plugin: "nav2_costmap_2d::DenoiseLayer"
+        enabled: true
+        minimal_group_size: 5
+        group_connectivity_type: 8
+
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        enabled: true
+        inflation_radius: 0.20
+        cost_scaling_factor: 5.0
+        inflate_unknown: false
+        inflate_around_unknown: false
+
+# Global Costmap
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      footprint_padding: 0.03
+      rolling_window: True
+      width: 10  
+      height: 10
+      update_frequency: 1.0
+      publish_frequency: 1.0 
+      global_frame: map
+      robot_base_frame: base_link
+      robot_radius: 0.22
+      resolution: 0.05
+      plugins: ["obstacle_layer", "denoise_layer", "inflation_layer"]
+      
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        footprint_clearing_enabled: true
+        max_obstacle_height: 2.0
+        combination_method: 1
+        scan:
+          topic: /scan
+          obstacle_max_range: 2.5
+          obstacle_min_range: 0.0
+          raytrace_max_range: 3.0
+          raytrace_min_range: 0.0
+          max_obstacle_height: 2.0
+          min_obstacle_height: 0.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+          inf_is_valid: false
+
+      denoise_layer:
+        plugin: "nav2_costmap_2d::DenoiseLayer"
+        enabled: True
+        minimal_group_size: 2
+        group_connectivity_type: 8
+
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        enabled: true
+        inflation_radius: 0.55
+        cost_scaling_factor: 1.0
+        inflate_unknown: false
+        inflate_around_unknown: true
+
+      always_send_full_costmap: True
+      introspection_mode: "disabled"
+
+# Planner
+planner_server:
+  ros__parameters:
+    expected_planner_frequency: 3.0
+    action_server_timeout: 10.0
+    use_sim_time: True
+    planner_plugins: ["GridBased"]
+    GridBased:
+      plugin: "nav2_navfn_planner/NavfnPlanner"
+      tolerance: 0.35
+      use_astar: True
+      allow_unknown: True
+      use_final_approach_orientation: False
+
+# Controller
+controller_server:
+  ros__parameters:
+    use_sim_time: True
+    controller_frequency: 10.0
+    use_realtime_priority: False 
+    publish_zero_velocity: True
+
+    min_x_velocity_threshold: 0.01
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.005
+    failure_tolerance: 1.0
+
+    progress_checker_plugin: "progress_checker"
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.05
+      movement_time_allowance: 10000000.0
+
+    goal_checker_plugins: ["general_goal_checker"]
+    general_goal_checker:
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.25
+      yaw_goal_tolerance: 0.25
+      stateful: True
+
+
+    controller_plugins: ["FollowPath"]
+    FollowPath:
+      #added rotation shim controller for rhex since it can't quite take the turns as it goes forward.
+      plugin: "nav2_rotation_shim_controller::RotationShimController"
+      angular_dist_threshold: 1.2
+      forward_sampling_distance: 0.6
+      rotate_to_heading_angular_velocity: 1.0
+      simulate_ahead_time: 1.0
+      rotate_to_goal_heading: False
+
+      primary_controller: "dwb_core::DWBLocalPlanner"
+
+      # Iterator
+      vx_samples: 15
+      vy_samples: 3
+      vtheta_samples: 10
+
+      # Kinematic Params
+      min_speed_theta: 0.0
+      max_vel_theta: 1.0
+
+      min_speed_xy: 0.0
+      max_speed_xy: 0.3
+      min_vel_x: 0.0
+      max_vel_x: 0.3
+      min_vel_y: 0.0
+      max_vel_y: 0.0
+
+      decel_lim_x: -2.5
+      acc_lim_x: 2.5
+      decel_lim_y: 0.0
+      acc_lim_y: 0.0
+      decel_lim_theta: -3.2
+      acc_lim_theta: 3.2
+
+      # Trajectory Generation
+      sim_time: 2.0
+      linear_granularity: 0.05
+      angular_granularity: 0.025
+      include_last_point: True
+
+      # Pruning
+      prune_plane: true
+      shorten_transformed_plan: True
+      prune_distance: 1.5
+      forward_prune_distance: 2.0
+      transform_tolerance: -1.0
+      debug_trajectory_details: True
+      short_circuit_trajectory_evaluation: True
+
+      #??
+      xy_goal_tolerance: 0.2
+      trans_stopped_velocity: 0.25
+      stateful: true
+
+      # Critics and Weights
+      critics: ["BaseObstacle", "GoalAlign", "GoalDist", "ObstacleFootprint", "Oscillation", "PathAlign", "PathDist", "RotateToGoal"]
+
+      BaseObstacle.scale: 2.0 # For Path Intersection with Costmap
+      ObstacleFootprint.scale: 2.0 # For Footprint Intersectoin with Costmap
+
+      GoalAlign.scale: 15.0
+      GoalAlign.forward_point_distance: 0.4
+      GoalDist.scale: 40.0
+
+      PathAlign.scale: 20.0
+      PathAlign.forward_point_distance: 0.4
+      PathDist.scale: 15.0
+
+      RotateToGoal.xy_goal_tolerance: 0.25
+      RotateToGoal.trans_stopped_veloctiy: 0.25 # default
+      RotateToGoal.slowing_factor: 5.0          # default
+      RotateToGoal.lookahead_time: -1.0
+      RotateToGoal.scale: 10.0
+
+
+# # Other Stuff Look At Later
+smoother_server:
+  ros__parameters:
+    use_sim_time: True
+    smoother_plugins: ["simple_smoother"]
+    simple_smoother:
+      plugin: "nav2_smoother::SimpleSmoother"
+      tolerance: 1.0e-10
+      max_its: 1000
+      do_refinement: True
+
+behavior_server:
+  ros__parameters:
+    costmap_topic: local_costmap/costmap_raw
+    footprint_topic: local_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins: ["spin", "backup", "drive_on_heading", "assisted_teleop", "wait"]
+    spin:
+      plugin: "nav2_behaviors/Spin"
+    backup:
+      plugin: "nav2_behaviors/BackUp"
+    drive_on_heading:
+      plugin: "nav2_behaviors/DriveOnHeading"
+    wait:
+      plugin: "nav2_behaviors/Wait"
+    assisted_teleop:
+      plugin: "nav2_behaviors/AssistedTeleop"
+    global_frame: odom
+    robot_base_frame: base_link
+    transform_tolerance: 0.1
+    use_sim_time: true
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 1.0
+    min_rotational_vel: 0.4
+    rotational_acc_lim: 3.2
+
+waypoint_follower:
+  ros__parameters:
+    use_sim_time: True
+    loop_rate: 20
+    stop_on_failure: false
+    waypoint_task_executor_plugin: "wait_at_waypoint"
+    wait_at_waypoint:
+      plugin: "nav2_waypoint_follower::WaitAtWaypoint"
+      enabled: True
+      waypoint_pause_duration: 200
+
+velocity_smoother:
+  ros__parameters:
+    use_sim_time: True
+    smoothing_frequency: 20.0
+    scale_velocities: False
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.26, 0.0, 1.0]
+    min_velocity: [-0.26, 0.0, -1.0]
+    max_accel: [2.5, 0.0, 3.2]
+    max_decel: [-2.5, 0.0, -3.2]
+    odom_topic: "/T265/pose"
+    odom_duration: 0.1
+    deadband_velocity: [0.0, 0.0, 0.0]
+    velocity_timeout: 1.0
