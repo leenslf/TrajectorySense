@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="gravel_detect_robot">
 
-  <xacro:property name="mesh_path" value="package://gravel_detect/meshes/moborobo_short.stl"/>
+  <xacro:property name="mesh_path" value="file://$(find gravel_detect)/meshes/moborobo_short.stl"/>
 
   <link name="base_link">
     <visual>
@@ -27,7 +27,7 @@
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <origin xyz="0 0 0.120" rpy="0 0 0"/>
   </joint>
 
   <xacro:macro name="caster_wheel" params="caster_name caster_xyz wheel_xyz">
@@ -85,7 +85,6 @@
 
   <xacro:caster_wheel caster_name="back_left_caster" caster_xyz="-0.300 0.150 -0.130" wheel_xyz="0.02 0 -0.05"/>
   <xacro:caster_wheel caster_name="back_right_caster" caster_xyz="-0.300 -0.150 -0.130" wheel_xyz="0.02 0 -0.05"/>
-
   <xacro:caster_wheel caster_name="front_left_caster" caster_xyz="0.300 0.150 -0.130" wheel_xyz="0.02 0 -0.05"/>
   <xacro:caster_wheel caster_name="front_right_caster" caster_xyz="0.300 -0.150 -0.130" wheel_xyz="0.02 0 -0.05"/>
 
@@ -153,7 +152,7 @@
     </plugin>
   </gazebo> 
 
-
+  <!-- Gazebo materials -->
   <gazebo reference="back_left_caster"><material>Gazebo/White</material></gazebo>
   <gazebo reference="back_left_caster_wheel"><material>Gazebo/Black</material></gazebo>
   <gazebo reference="back_right_caster"><material>Gazebo/White</material></gazebo>
