@@ -17,26 +17,12 @@ def generate_launch_description():
         description='whether to start nav2 or not'
     )
     launch_nav2 = LaunchConfiguration("launch_nav2")
-
-   
-
-    # costmap_compressor =Node(
-    #     package='tbt_otonom_compression',
-    #     executable='compressor.py',
-    #     name='compressor',
-    #     condition=IfCondition(launch_nav2)
-    # )
-
-    # traversability = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('tbt_otonom_traversability'), 'launch', 'voxel_filter_polar.launch.py')),
-    #     condition=IfCondition(launch_nav2)
-    # )
     
     nav2_launch = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('nav_launch'), 'launch', 'navigation_launch.py')),
             launch_arguments={
                 'autostart': 'true',
-                'use_sim_time': 'true', # hardcoded here!
+                'use_sim_time': 'true', 
                 'params_file': params_path,
             }.items(),
             condition=IfCondition(launch_nav2)
@@ -49,7 +35,5 @@ def generate_launch_description():
 
     return LaunchDescription([
         launch_nav2_declaration,
-        # costmap_compressor,
-        # traversability,
         nav2
     ])
