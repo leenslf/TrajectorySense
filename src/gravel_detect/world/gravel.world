@@ -10,7 +10,7 @@
       <uri>model://ground_plane</uri>
     </include>
     
-    <!-- Add some walls for LiDAR to detect -->
+    <!-- Original walls for LiDAR to detect -->
     <model name="wall_1">
       <static>true</static>
       <pose>5 0 1 0 0 0</pose>
@@ -51,6 +51,110 @@
           </geometry>
         </visual>
       </link>
+    </model>
+    
+    <!-- Simple box obstacles -->
+    <model name="box_1">
+      <static>true</static>
+      <pose>2 2 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="box_2">
+      <static>true</static>
+      <pose>-2 -2 0.3 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.8 0.8 0.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.8 0.8 0.6</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Simple cylinder obstacle -->
+    <model name="pillar">
+      <static>true</static>
+      <pose>0 3 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.0</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.0</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- One simple dynamic object with basic movement plugin -->
+    <model name="dynamic_box">
+      <pose>-3 1 0.5 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>1.0</mass>
+          <inertia>
+            <ixx>0.17</ixx>
+            <iyy>0.17</iyy>
+            <izz>0.17</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+      
+      <!-- Simple movement plugin -->
+      <plugin name="box_mover" filename="libgazebo_ros_force.so">
+        <ros>
+          <namespace>/dynamic_box</namespace>
+        </ros>
+        <link_name>link</link_name>
+      </plugin>
     </model>
     
     <include>
