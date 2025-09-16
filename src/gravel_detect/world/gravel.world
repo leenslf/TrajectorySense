@@ -10,96 +10,301 @@
       <uri>model://ground_plane</uri>
     </include>
     
-    <!-- Original walls for LiDAR to detect -->
-    <model name="wall_1">
+    <!-- Four walls forming a boundary  -->
+    <!-- North Wall -->
+    <model name="wall_north">
       <static>true</static>
-      <pose>5 0 1 0 0 0</pose>
+      <pose>0 8 1 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.2 10 2</size>
+              <size>12 0.2 2</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.2 10 2</size>
+              <size>12 0.2 2</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     
-    <model name="wall_2">
+    <!-- South Wall -->
+    <model name="wall_south">
       <static>true</static>
-      <pose>-5 0 1 0 0 0</pose>
+      <pose>0 -8 1 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.2 10 2</size>
+              <size>12 0.2 2</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.2 10 2</size>
+              <size>12 0.2 2</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     
-    <!-- Simple box obstacles -->
-    <model name="box_1">
+    <!-- East Wall -->
+    <model name="wall_east">
       <static>true</static>
-      <pose>2 2 0.5 0 0 0</pose>
+      <pose>6 0 1 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>0.2 14 2</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>0.2 14 2</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     
-    <model name="box_2">
+    <!-- West Wall -->
+    <model name="wall_west">
       <static>true</static>
-      <pose>-2 -2 0.3 0 0 0</pose>
+      <pose>-6 0 1 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
             <box>
-              <size>0.8 0.8 0.6</size>
+              <size>0.2 14 2</size>
             </box>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
             <box>
-              <size>0.8 0.8 0.6</size>
+              <size>0.2 14 2</size>
             </box>
           </geometry>
         </visual>
       </link>
     </model>
     
-    <!-- Simple cylinder obstacle -->
-    <model name="pillar">
+    <!-- Diverse Obstacles -->
+    
+    <!-- Large box in northeast quadrant -->
+    <model name="large_box">
       <static>true</static>
-      <pose>0 3 0.5 0 0 0</pose>
+      <pose>4 5 0.75 0 0 0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.5 1 1.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.5 1 1.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Tall cylinder in northwest quadrant -->
+    <model name="tall_pillar">
+      <static>true</static>
+      <pose>-4 6 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>2.0</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.4</radius>
+              <length>2.0</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Sphere in southeast quadrant -->
+    <model name="large_sphere">
+      <static>true</static>
+      <pose>5 -4 0.6 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <sphere>
+              <radius>0.6</radius>
+            </sphere>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <sphere>
+              <radius>0.6</radius>
+            </sphere>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Thin column in southwest quadrant -->
+    <model name="thin_column">
+      <static>true</static>
+      <pose>-5 -5 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.15</radius>
+              <length>3.0</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.15</radius>
+              <length>3.0</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Small boxes cluster  -->
+    <model name="small_box_1">
+      <static>true</static>
+      <pose>3 -2.5 0.25 0 0 0.2</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="small_box_2">
+      <static>true</static>
+      <pose>2.5 -2 0.25 0 0 -0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.5</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- L-shaped obstacle -->
+    <model name="l_obstacle_1">
+      <static>true</static>
+      <pose>-2.5 4 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.0 0.3 0.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.0 0.3 0.8</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <model name="l_obstacle_2">
+      <static>true</static>
+      <pose>-3.35 3.15 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.3 1.4 0.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.3 1.4 0.8</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Ramp  -->
+    <model name="angled_ramp">
+      <static>true</static>
+      <pose>4 1 0.3 0 0.3 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.5 1.2 0.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.5 1.2 0.6</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+    
+    <!-- Medium cylinder near center but offset -->
+    <model name="medium_pillar">
+      <static>true</static>
+      <pose>1.5 2.5 0.5 0 0 0</pose>
       <link name="link">
         <collision name="collision">
           <geometry>
@@ -120,9 +325,9 @@
       </link>
     </model>
     
-    <!-- One simple dynamic object with basic movement plugin -->
+    <!-- Keep the dynamic object  -->
     <model name="dynamic_box">
-      <pose>-3 1 0.5 0 0 0</pose>
+      <pose>-1.5 -1.5 0.5 0 0 0</pose>
       <link name="link">
         <inertial>
           <mass>1.0</mass>
@@ -151,21 +356,17 @@
       <!-- Simple movement plugin -->
       <plugin name="box_mover" filename="libgazebo_ros_force.so">
         <ros>
-          <namespace>/dynamic_box</namespace>
+          <namespace>dynamic_box</namespace>
+          <remapping>gazebo/apply_body_wrench:=apply_force</remapping>
         </ros>
-        <link_name>link</link_name>
+        <link_name>dynamic_box::link</link_name>
+        <force_topic>force</force_topic>
       </plugin>
     </model>
     
-    <include>
-      <name>gravel</name>
-      <uri>model://gravel</uri>
-      <pose>0 0 0 0 0 0</pose>
-    </include>
-    
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>9.0 -12.0 6.0 0.0 0.3 2.2</pose>
+        <pose frame=''>12.0 -15.0 8.0 0.0 0.4 2.4</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -173,3 +374,26 @@
     
   </world>
 </sdf>
+
+<!-- to move the dynamic object
+# Move forward (positive X direction)
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 8.0, y: 0.0, z: 0.0}" -r 10
+
+# Move backward (negative X direction)  
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: -10.0, y: 0.0, z: 0.0}" -r 10
+
+# Move right (positive Y direction)
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 0.0, y: 10.0, z: 0.0}" -r 10
+
+# Move left (negative Y direction)
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 0.0, y: -10.0, z: 0.0}" -r 10
+
+# Stop the box (apply zero force)
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 0.0, y: 0.0, z: 0.0}" --once
+
+# Move diagonally
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 7.0, y: 7.0, z: 0.0}" -r 10
+
+# Add rotation (torque around Z-axis)
+ros2 topic pub /dynamic_box/gazebo_ros_force geometry_msgs/msg/Wrench "force: {x: 5.0, y: 0.0, z: 0.0}, torque: {x: 0.0, y: 0.0, z: 2.0}" -r 10 
+-->

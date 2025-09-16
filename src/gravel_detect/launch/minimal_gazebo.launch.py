@@ -13,10 +13,17 @@ def generate_launch_description():
     world_file = os.path.join(pkg_gravel_detect, 'world', 'gravel.world')
     
     return LaunchDescription([
-        # Launch Gazebo with world
-        ExecuteProcess(
-            cmd=['ros2', 'launch', 'gazebo_ros', 'gazebo.launch.py', f'world:={world_file}'],
-            output='screen'
+        
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
+            ]),
+            launch_arguments={
+                'world': world_file,
+                'gui': 'true',
+                'server': 'true',
+                'verbose': 'true'
+            }.items()
         ),
         
         # Launch robot state publisher 
@@ -28,14 +35,14 @@ def generate_launch_description():
         
         # Spawn robot after a delay
         TimerAction(
-            period=3.0,  # Wait 3 seconds for Gazebo to start
+            period=5.0,  
             actions=[
                 ExecuteProcess(
                     cmd=[
                         'ros2', 'run', 'gazebo_ros', 'spawn_entity.py',
                         '-topic', '/robot_description',
                         '-entity', 'gravel_detect',
-                        '-x', '0.5', '-y', '1.0', '-z', '0.2'
+                        '-x', '0.0', '-y', '0.0', '-z', '0.2'
                     ],
                     output='screen'
                 )

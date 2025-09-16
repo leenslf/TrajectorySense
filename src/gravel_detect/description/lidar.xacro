@@ -23,12 +23,10 @@
             </geometry>
         </collision>
         <inertial>
-    <mass value="0.83"/>
-    <origin xyz="0 0 0"/>
-    <inertia ixx="0.00108" ixy="0" ixz="0" 
-             iyy="0.00108" iyz="0" 
-             izz="0.000562"/>
-    </inertial>
+            <mass value="0.83"/>
+            <origin xyz="0 0 0"/>
+            <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+        </inertial>
     </link>
 
     <!-- Use actual Velodyne plugin that includes time and ring fields -->
@@ -40,13 +38,13 @@
             <ray>
                 <scan>
                     <horizontal>
-                        <samples>360</samples>  <!-- More samples for Velodyne-like behavior -->
+                        <samples>1800</samples>  <!-- More samples for Velodyne-like behavior --> 
                         <resolution>1</resolution>
                         <min_angle>-3.141592654</min_angle>
                         <max_angle>3.141592654</max_angle>
                     </horizontal>
                     <vertical>
-                        <samples>8</samples>   <!-- 16 rings like VLP-16 -->
+                        <samples>16</samples>   <!-- 16 rings like VLP-16 -->
                         <resolution>1</resolution>
                         <min_angle>-0.261799388</min_angle>
                         <max_angle>0.261799388</max_angle>
