@@ -118,7 +118,7 @@ local_costmap:
         observation_sources: scan
         scan:
           topic: /points_raw
-          data_type: "LaserScan"
+          data_type: "PointCloud2"
           min_obstacle_height: -5.0
           max_obstacle_height: 5.0
           inf_is_valid: True
@@ -176,7 +176,7 @@ global_costmap:
           min_obstacle_height: 0.0
           clearing: True
           marking: True
-          data_type: "LaserScan"
+          data_type: "PointCloud2"
           inf_is_valid: false
 
       denoise_layer:
