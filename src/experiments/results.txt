@@ -1,0 +1,151 @@
+python3 data_analyzer.py test_results --latex
+============================================================
+SLAM EVALUATION REPORT
+============================================================
+Generated: 2025-09-17 17:11:43
+
+Loaded 59 points from test_rotate_1758128102.csv
+Loaded 296 points from test_square_1758128139.csv
+Loaded 114 points from test_straight_1758127998.csv
+Loaded 108 points from test_circle_1758128378.csv
+
+ROTATE RESULTS:
+------------------------------
+  Run: test_rotate_1758128102.csv
+    Samples: 59, Duration: 12.4s
+    Position RMSE: 215.1 mm
+    Orientation RMSE: 3.94°
+    Max pos error: 311.8 mm
+
+  PATTERN SUMMARY (1 runs, 59 total samples):
+    Position RMSE: 215.1 ± 53.3 mm
+    Orientation RMSE: 3.94 ± 1.73°
+    Max error: 311.8 mm
+
+SQUARE RESULTS:
+------------------------------
+  Run: test_square_1758128139.csv
+    Samples: 296, Duration: 71.4s
+    Position RMSE: 373.6 mm
+    Orientation RMSE: 1.49°
+    Max pos error: 438.7 mm
+
+  PATTERN SUMMARY (1 runs, 296 total samples):
+    Position RMSE: 373.6 ± 29.3 mm
+    Orientation RMSE: 1.49 ± 1.15°
+    Max error: 438.7 mm
+
+STRAIGHT RESULTS:
+------------------------------
+  Run: test_straight_1758127998.csv
+    Samples: 114, Duration: 24.9s
+    Position RMSE: 141.9 mm
+    Orientation RMSE: 0.10°
+    Max pos error: 230.4 mm
+
+  PATTERN SUMMARY (1 runs, 114 total samples):
+    Position RMSE: 141.9 ± 51.1 mm
+    Orientation RMSE: 0.10 ± 0.06°
+    Max error: 230.4 mm
+
+CIRCLE RESULTS:
+------------------------------
+  Run: test_circle_1758128378.csv
+    Samples: 108, Duration: 25.0s
+    Position RMSE: 299.9 mm
+    Orientation RMSE: 4.17°
+    Max pos error: 409.0 mm
+
+  PATTERN SUMMARY (1 runs, 108 total samples):
+    Position RMSE: 299.9 ± 96.1 mm
+    Orientation RMSE: 4.17 ± 1.30°
+    Max error: 409.0 mm
+
+OVERALL SUMMARY:
+------------------------------
+Total: 4 patterns, 4 runs, 577 samples
+Best pattern: straight (141.9 mm RMSE)
+Worst pattern: square (373.6 mm RMSE)
+System-wide position RMSE: 311.6 mm
+System-wide orientation RMSE: 2.45°
+
+
+
+
+===============================
+SLAM EVALUATION REPORT
+============================================================
+Generated: 2025-09-18 07:38:51
+
+Loaded 59 points from test_rotate_1758128102.csv
+Loaded 296 points from test_square_1758128139.csv
+Loaded 87 points from test_straight_1758180961.csv
+Loaded 114 points from test_straight_1758127998.csv
+Loaded 108 points from test_circle_1758128378.csv
+
+ROTATE RESULTS:
+------------------------------
+  Run: test_rotate_1758128102.csv
+    Samples: 59, Duration: 12.4s
+    Position RMSE: 215.1 mm
+    Orientation RMSE: 3.94°
+    Max pos error: 311.8 mm
+
+  PATTERN SUMMARY (1 runs, 59 total samples):
+    Position RMSE: 215.1 ± 53.3 mm
+    Orientation RMSE: 3.94 ± 1.73°
+    Max error: 311.8 mm
+
+SQUARE RESULTS:
+------------------------------
+  Run: test_square_1758128139.csv
+    Samples: 296, Duration: 71.4s
+    Position RMSE: 373.6 mm
+    Orientation RMSE: 1.49°
+    Max pos error: 438.7 mm
+
+  PATTERN SUMMARY (1 runs, 296 total samples):
+    Position RMSE: 373.6 ± 29.3 mm
+    Orientation RMSE: 1.49 ± 1.15°
+    Max error: 438.7 mm
+
+STRAIGHT RESULTS:
+------------------------------
+  Run: test_straight_1758180961.csv (with dynamic box moving around in the world )
+    Samples: 87, Duration: 24.6s
+    Position RMSE: 163.7 mm
+    Orientation RMSE: 0.10°
+    Max pos error: 235.4 mm
+
+  Run: test_straight_1758127998.csv
+    Samples: 114, Duration: 24.9s
+    Position RMSE: 141.9 mm
+    Orientation RMSE: 0.10°
+    Max pos error: 230.4 mm
+
+  PATTERN SUMMARY (2 runs, 201 total samples):
+    Position RMSE: 151.7 ± 48.5 mm
+    Orientation RMSE: 0.10 ± 0.06°
+    Max error: 235.4 mm
+
+CIRCLE RESULTS:
+------------------------------
+  Run: test_circle_1758128378.csv
+    Samples: 108, Duration: 25.0s
+    Position RMSE: 299.9 mm
+    Orientation RMSE: 4.17°
+    Max pos error: 409.0 mm
+
+  PATTERN SUMMARY (1 runs, 108 total samples):
+    Position RMSE: 299.9 ± 96.1 mm
+    Orientation RMSE: 4.17 ± 1.30°
+    Max error: 409.0 mm
+
+OVERALL SUMMARY:
+------------------------------
+Total: 4 patterns, 5 runs, 664 samples
+Best pattern: straight (151.7 mm RMSE)
+Worst pattern: square (373.6 mm RMSE)
+System-wide position RMSE: 296.5 mm
+System-wide orientation RMSE: 2.28°
+Performance rating: NEEDS IMPROVEMENT
