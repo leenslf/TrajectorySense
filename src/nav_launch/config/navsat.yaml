@@ -7,3 +7,4 @@
     zero_altitude: true
     wait_for_datum: false
     use_local_cartesian: false
+    broadcast_utm_transform_as_parent_frame_: true
