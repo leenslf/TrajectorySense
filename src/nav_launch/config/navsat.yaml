@@ -1,0 +1,8 @@
+use_odometry_yaw: true
+broadcast_utm_transform: true
+use_sim_time: true
+publish_map_tf: true
+zero_altitude: true
+wait_for_datum: false
+datum: [0.0, 0.0, 0.0]   # leave unset unless you want fixed reference
+use_manual_datum: false

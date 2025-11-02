@@ -21,6 +21,15 @@
       <uri>model://ground_plane</uri>
     </include>
     
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>37.4275</latitude_deg>
+      <longitude_deg>-122.1697</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+
+    
     <!-- Four walls forming a boundary  -->
     <!-- North Wall -->
     <model name="wall_north">
