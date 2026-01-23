@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="imu_link">
+      <visual>
+        <geometry>
+          <box size="0.01 0.01 0.005"/>
+        </geometry>
+      </visual>
+
+      <collision>
+        <geometry>
+          <box size="0.01 0.01 0.005"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+      </inertial>
+    </link>
+
+    <!-- IMU mounted directly on base_link for stable reference -->
+    <joint name="imu_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+      <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>  <!-- Centered on robot body -->
+    </joint>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="moborobo_imu" type="imu">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>2e-4</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>1.7e-2</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+        <plugin name="moborobo_imu" filename="libgazebo_ros_imu_sensor.so">
+            <ros>
+                <namespace>imu</namespace>
+                <remapping>~/out:=data</remapping>
+            </ros>
+            <frame_name>imu_link</frame_name> 
+            <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        </plugin>
+    </sensor>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+</robot>

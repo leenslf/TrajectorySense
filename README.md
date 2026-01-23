@@ -1,26 +1,9 @@
+## Overview
+TrajectorySense is a ROS 2 workspace for simulating and evaluating a mobile robot in Gazebo. It includes the `moborobo_robot` package with robot description, meshes, controllers, and a gravel world, plus experiment scripts for running evaluation scenarios.
+
 ## Installation
 ```bash
 git clone https://github.com/leenslf/TrajectorySense.git
-```
-
-## Docker
-(TODO: improve this)
-
-Build Docker image:
-```bash
-chmod +x *.sh
-cd util
-./build_docker.sh
-```
-
-Run container:
-```bash
-cd util
-./run_docker.sh
-```
-Excute container:
-```bash
-docker exec -it trajectorysense-container bash
 ```
 
 ## Build ROS2 Workspace
@@ -34,6 +17,5 @@ source install/setup.bash
 ## Running the Simulation
 
 ```bash
-ros2 launch gravel_detect minimal_gazebo.launch.py
+ros2 launch moborobo_robot minimal_gazebo.launch.py
 ```
-

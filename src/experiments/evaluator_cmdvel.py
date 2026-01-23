@@ -31,7 +31,7 @@ class HybridSLAMTester(Node):
         self.max_time_diff = 0.05  # 50ms maximum time difference for sync
         
         # Robot parameters
-        self.robot_name = "gravel_detect"
+        self.robot_name = "moborobo_robot"
         self.robot_index = None
         
         # File for data logging
