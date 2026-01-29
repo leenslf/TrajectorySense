@@ -30,7 +30,7 @@ class ScientificOdometryEvaluator(Node):
         self.timestamps = []
         
         # Robot parameters
-        self.robot_name = "gravel_detect"
+        self.robot_name = "moborobo_robot"
         self.robot_index = None
         
         # File for data logging
