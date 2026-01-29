@@ -17,6 +17,27 @@ def generate_launch_description():
         description='whether to start nav2 or not'
     )
     launch_nav2 = LaunchConfiguration("launch_nav2")
+
+    # launch_state_estimation_declaration = DeclareLaunchArgument(
+    #     "launch_state_estimation",
+    #     default_value="true",
+    #     description='whether to start state estimation or not'
+    # )
+    # launch_state_estimation = LaunchConfiguration("launch_state_estimation")
+
+    # state_estimation_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         os.path.join(
+    #             get_package_share_directory('state_estimation'),
+    #             'launch',
+    #             'state_estimation.launch.py'
+    #         )
+    #     ),
+    #     launch_arguments={
+    #         'use_sim_time': 'true',
+    #     }.items(),
+    #     condition=IfCondition(launch_state_estimation)
+    # )
     
     nav2_launch = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(os.path.join(get_package_share_directory('nav_launch'), 'launch', 'navigation_launch.py')),
@@ -35,5 +56,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         launch_nav2_declaration,
+        launch_state_estimation_declaration,
+        state_estimation_launch,
         nav2
     ])

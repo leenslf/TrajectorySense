@@ -1,0 +1,19 @@
+/**:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 30.0
+    delay: 0.0
+    magnetic_declination_radians: 0.0
+    yaw_offset: 0.0
+    zero_altitude: true
+    publish_filtered_gps: true
+    broadcast_utm_transform: false
+    wait_for_datum: false
+
+    imu0: /imu/data
+    gps0: /gps/fix
+    odom0: /odometry/filtered
+
+    base_link_frame: base_footprint
+    world_frame: odom
+    output_frame: odom
