@@ -16,9 +16,8 @@ setup(
         (os.path.join('share', package_name, 'description'), glob('description/*.xacro')),
         (os.path.join('share', package_name, 'meshes'), 
          ['meshes/moborobo_short.stl']),
-        # Add world files and models
+        # Add world files
         (os.path.join('share', package_name, 'world'), glob('world/*.world')),
-        (os.path.join('share', package_name, 'world/gravel'), ['world/gravel/model.config', 'world/gravel/model.sdf']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
