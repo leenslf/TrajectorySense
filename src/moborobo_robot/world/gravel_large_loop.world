@@ -1,0 +1,255 @@
+<?xml version="1.0" ?>
+<sdf version='1.6'>
+  <world name='gravel_large_loop'>
+
+    <!-- Gazebo State Publisher Plugin -->
+    <plugin name="gazebo_ros_state" filename="libgazebo_ros_state.so">
+      <ros>
+        <namespace></namespace>
+        <remapping>model_states:=gazebo/model_states</remapping>
+        <remapping>link_states:=gazebo/link_states</remapping>
+      </ros>
+      <update_rate>50.0</update_rate>
+    </plugin>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Spherical coordinates — same as gravel_experiment.world -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>37.4275</latitude_deg>
+      <longitude_deg>-122.1697</longitude_deg>
+      <elevation>0.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+
+    <!-- 25 × 25 m walled arena (unchanged) -->
+
+    <!-- North Wall -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 12.5 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>25.4 0.2 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>25.4 0.2 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- South Wall -->
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -12.5 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>25.4 0.2 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>25.4 0.2 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- East Wall -->
+    <model name="wall_east">
+      <static>true</static>
+      <pose>12.5 0 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.2 25.0 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 25.0 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- West Wall -->
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-12.5 0 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.2 25.0 2</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.2 25.0 2</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ── Perimeter obstacles ─────────────────────────────────────────────────
+         The scenario-3 loop stays within ~5 m of origin.  All obstacles are
+         placed at 6–9 m from origin so they are visible to LiDAR (giving
+         features for scan-matching) but never intersect the robot path.
+    ─────────────────────────────────────────────────────────────────────────── -->
+
+    <!-- Large box — northeast, ~8.5 m from origin -->
+    <model name="large_box">
+      <static>true</static>
+      <pose>6 6 0.75 0 0 0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>1.5 1 1.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>1.5 1 1.5</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Tall pillar — north, ~8 m from origin -->
+    <model name="tall_pillar">
+      <static>true</static>
+      <pose>0 8 1 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder><radius>0.4</radius><length>2.0</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder><radius>0.4</radius><length>2.0</length></cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Large sphere — southeast, ~8.5 m from origin -->
+    <model name="large_sphere">
+      <static>true</static>
+      <pose>6 -6 0.6 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><sphere><radius>0.6</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.6</radius></sphere></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Thin column — west, ~7 m from origin -->
+    <model name="thin_column">
+      <static>true</static>
+      <pose>-7 0 1.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder><radius>0.15</radius><length>3.0</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder><radius>0.15</radius><length>3.0</length></cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Small box cluster — east, ~7 m from origin -->
+    <model name="small_box_1">
+      <static>true</static>
+      <pose>7 1 0.25 0 0 0.2</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="small_box_2">
+      <static>true</static>
+      <pose>7 -1 0.25 0 0 -0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- L-shaped obstacle — northwest, ~9 m from origin -->
+    <model name="l_obstacle_1">
+      <static>true</static>
+      <pose>-6 7 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>2.0 0.3 0.8</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>2.0 0.3 0.8</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <model name="l_obstacle_2">
+      <static>true</static>
+      <pose>-6.85 6.15 0.4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.3 1.4 0.8</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.3 1.4 0.8</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Angled ramp — south, ~7 m from origin -->
+    <model name="angled_ramp">
+      <static>true</static>
+      <pose>0 -7 0.3 0 0.3 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>1.5 1.2 0.6</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>1.5 1.2 0.6</size></box></geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Medium pillar — southwest, ~8.5 m from origin -->
+    <model name="medium_pillar">
+      <static>true</static>
+      <pose>-6 -6 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder><radius>0.3</radius><length>1.0</length></cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder><radius>0.3</radius><length>1.0</length></cylinder>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>25.0 -30.0 15.0 0.0 0.45 2.4</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+
+  </world>
+</sdf>
