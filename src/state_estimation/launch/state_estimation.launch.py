@@ -16,17 +16,8 @@ def generate_launch_description():
     )
 
     pkg_share = get_package_share_directory('state_estimation')
-    ekf_local = os.path.join(pkg_share, 'config', 'ekf_local.yaml')
     navsat = os.path.join(pkg_share, 'config', 'navsat.yaml')
     ekf_global = os.path.join(pkg_share, 'config', 'ekf_global.yaml')
-
-    ekf_local_node = Node(
-        package='robot_localization',
-        executable='ekf_node',
-        name='ekf_local',
-        output='screen',
-        parameters=[ekf_local, {'use_sim_time': use_sim_time}],
-    )
 
     navsat_node = Node(
         package='robot_localization',
@@ -34,6 +25,11 @@ def generate_launch_description():
         name='navsat_transform',
         output='screen',
         parameters=[navsat, {'use_sim_time': use_sim_time}],
+        remappings=[
+            ('imu', '/imu/data'),
+            ('odometry/filtered', '/lio/odometry'),
+            ('odometry/gps', '/gps/odom'),
+        ],
     )
 
     ekf_global_node = Node(
@@ -46,7 +42,6 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_use_sim_time,
-        ekf_local_node,
         navsat_node,
         ekf_global_node,
     ])
