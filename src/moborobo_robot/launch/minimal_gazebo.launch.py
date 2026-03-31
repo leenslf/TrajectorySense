@@ -1,19 +1,28 @@
 # minimal_gazebo.launch.py
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, ExecuteProcess, TimerAction
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, ExecuteProcess, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # Get package directory
     pkg_moborobo_robot = get_package_share_directory('moborobo_robot')
-    
-    # World file path
-    world_file = os.path.join(pkg_moborobo_robot, 'world', 'gravel.world')
-    
+
+    # World file argument — defaults to gravel.world, overridable via CLI:
+    #   ros2 launch moborobo_robot minimal_gazebo.launch.py world_file:=/path/to/other.world
+    default_world = os.path.join(pkg_moborobo_robot, 'world', 'gravel.world')
+    world_file_arg = DeclareLaunchArgument(
+        'world_file',
+        default_value=default_world,
+        description='Full path to the Gazebo world file to load'
+    )
+    world_file = LaunchConfiguration('world_file')
+
     return LaunchDescription([
-        
+        world_file_arg,
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')

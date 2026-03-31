@@ -2,3 +2,5 @@ build/
 log/
 install/
 src/experiments/test_results/
+src/gps_experiments/bags/
+src/gps_experiments/results/

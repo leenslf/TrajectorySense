@@ -10,6 +10,7 @@ bt_navigator:
     global_frame: map
     robot_base_frame: base_footprint
     odom_topic: /lio/odometry
+    # odom_topic: /odometry/filtered # alternative
     use_sim_time: True
     bond_heartbeat_period: 0.2
     # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
