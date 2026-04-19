@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>umx_driver</name>
+  <version>0.1.0</version>
+  <description>Minimal ROS 2 UM7 driver publishing /imu/data and /imu/mag using rsl_comm_py.</description>
+  <maintainer email="leen.said@hacettepe.edu.tr">Leen Said</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
