@@ -238,8 +238,7 @@ def compute_phase_metrics(lio_aligned, gps_aligned, outage_start, outage_end):
 # ── Step 5: Plots ─────────────────────────────────────────────────────────────
 
 def make_trajectory_plot(bag_dir, scenario_id,
-                         gt_poses, lio_aligned, gps_aligned,
-                         outage_start=None, outage_end=None):
+                         gt_poses, lio_aligned):
     fig, ax = plt.subplots(figsize=(8, 8))
 
     # Ground truth
@@ -255,21 +254,6 @@ def make_trajectory_plot(bag_dir, scenario_id,
         ax.plot(lx, ly, 'r--', label='LIO Odometry', linewidth=1.2)
         ax.plot(lx[0], ly[0], 'ro', markersize=7)
 
-    # GPS-fused odometry
-    if gps_aligned:
-        gx = [odom[0] for _, odom, _ in gps_aligned]
-        gy = [odom[1] for _, odom, _ in gps_aligned]
-        ax.plot(gx, gy, 'b--', label='GPS-Fused Odometry', linewidth=1.2)
-        ax.plot(gx[0], gy[0], 'bo', markersize=7)
-
-    # Scenario 4: shade x-axis region corresponding to the GPS outage
-    if scenario_id == 4 and outage_start is not None and outage_end is not None:
-        outage_xs = [p['x'] for p in gt_poses
-                     if outage_start <= p['timestamp'] <= outage_end]
-        if outage_xs:
-            ax.axvspan(min(outage_xs), max(outage_xs),
-                       alpha=0.15, color='grey', label='GPS Outage')
-
     ax.set_aspect('equal')
     ax.grid(True)
     ax.legend()
@@ -283,35 +267,15 @@ def make_trajectory_plot(bag_dir, scenario_id,
     print(f'[plot] Saved: {out_path}')
 
 
-def make_error_plot(bag_dir, scenario_id,
-                    lio_aligned, gps_aligned,
-                    outage_start=None, outage_end=None):
+def make_error_plot(bag_dir, scenario_id, lio_aligned):
     fig, ax = plt.subplots(figsize=(10, 5))
 
-    # Common time origin: earliest timestamp across both trajectories
-    t0_candidates = []
-    if lio_aligned:
-        t0_candidates.append(lio_aligned[0][2])
-    if gps_aligned:
-        t0_candidates.append(gps_aligned[0][2])
-    t0 = min(t0_candidates) if t0_candidates else 0.0
+    t0 = lio_aligned[0][2] if lio_aligned else 0.0
 
     if lio_aligned:
         lio_t  = [ts - t0 for _, _, ts in lio_aligned]
         lio_pe = [_pos_error(gt, odom) for gt, odom, _ in lio_aligned]
         ax.plot(lio_t, lio_pe, 'r-', label='LIO Position Error', linewidth=1.2)
-
-    if gps_aligned:
-        gps_t  = [ts - t0 for _, _, ts in gps_aligned]
-        gps_pe = [_pos_error(gt, odom) for gt, odom, _ in gps_aligned]
-        ax.plot(gps_t, gps_pe, 'b-', label='GPS-Fused Position Error', linewidth=1.2)
-
-    # Scenario 4: vertical dashed lines at outage boundaries
-    if scenario_id == 4 and outage_start is not None and outage_end is not None:
-        ax.axvline(outage_start - t0, color='k', linestyle='--',
-                   linewidth=1.2, label='Outage Start')
-        ax.axvline(outage_end   - t0, color='k', linestyle=':',
-                   linewidth=1.2, label='Outage End')
 
     ax.set_xlabel('Time (s)')
     ax.set_ylabel('Position Error (m)')
@@ -398,10 +362,8 @@ def main():
     print(f'[output] Written: {results_path}')
 
     # Step 5: Generate plots
-    make_trajectory_plot(bag_dir, scenario_id, gt_poses,
-                         lio_aligned, gps_aligned, outage_start, outage_end)
-    make_error_plot(bag_dir, scenario_id, lio_aligned, gps_aligned,
-                    outage_start, outage_end)
+    make_trajectory_plot(bag_dir, scenario_id, gt_poses, lio_aligned)
+    make_error_plot(bag_dir, scenario_id, lio_aligned)
 
     # Stdout summary
     print()

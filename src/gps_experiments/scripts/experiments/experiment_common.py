@@ -35,7 +35,7 @@ TOPICS_TO_RECORD = [
     '/cmd_vel',
     '/imu/data',
     '/lio/odometry',
-    '/odometry/filtered',
+    '/gps/odom',
     '/gps/fix',
     '/gazebo/model_states',   # ground-truth source
 ]

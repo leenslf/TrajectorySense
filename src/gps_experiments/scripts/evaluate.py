@@ -23,7 +23,7 @@ from nav_msgs.msg import Odometry
 
 TOPIC_GROUND_TRUTH = '/gazebo/model_states'
 TOPIC_LIO_ODOM     = '/lio/odometry'
-TOPIC_GPS_FUSED    = '/odometry/filtered'
+TOPIC_GPS_FUSED    = '/gps/odom'
 ROBOT_NAME         = 'moborobo_robot'
 
 
