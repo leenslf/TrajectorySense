@@ -13,9 +13,10 @@ def generate_launch_description():
                     {
                         "port": "/dev/ttyUSB0",
                         "baud": 115200,
+                        "update_rate": 100,
                         "frame_id": "imu_link",
                         "tf_ned_to_enu": True,
-                        "mag_updates": True,
+                        "mag_updates": False,
                         "zero_gyros": True,
                     }
                 ],
